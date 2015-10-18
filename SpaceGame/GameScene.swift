@@ -9,37 +9,90 @@
 import SpriteKit
 
 class GameScene: SKScene {
+    
+    let stars = SKSpriteNode(imageNamed: "stars")
+    let stars2 = SKSpriteNode(imageNamed: "stars")
+    let planet = SKSpriteNode(imageNamed: "planetBig")
+    let planet2 = SKSpriteNode(imageNamed: "planetRing")
+    let starShip = SKSpriteNode(imageNamed: "Spaceship")
+    
     override func didMoveToView(view: SKView) {
-        /* Setup your scene here */
-        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
-        myLabel.text = "Hello, World!";
-        myLabel.fontSize = 45;
-        myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame));
+
+        // Add Background
+        setupBackground()
+       
+        // Add Stars
+        setupStars()
         
-        self.addChild(myLabel)
+        // Add Planet
+        setupPlanets(planet)
+        setupPlanets(planet2)
+        
+        // Add Ship
+        starShip.size = CGSize(width: 100, height: 100)
+        starShip.zPosition = 3
+        starShip.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/3)
+        addChild(starShip)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
        /* Called when a touch begins */
-        
-        for touch in touches {
-            let location = touch.locationInNode(self)
-            
-            let sprite = SKSpriteNode(imageNamed:"Spaceship")
-            
-            sprite.xScale = 0.5
-            sprite.yScale = 0.5
-            sprite.position = location
-            
-            let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
-            
-            sprite.runAction(SKAction.repeatActionForever(action))
-            
-            self.addChild(sprite)
-        }
     }
    
     override func update(currentTime: CFTimeInterval) {
-        /* Called before each frame is rendered */
+
+        stars.position = CGPoint(x: stars.position.x, y: stars.position.y - 1)
+        stars2.position = CGPoint(x: stars2.position.x, y: stars2.position.y - 1)
+
+        planet.position = CGPoint(x: planet.position.x, y: planet.position.y - 5)
+        planet2.position = CGPoint(x: planet2.position.x, y: planet2.position.y - 5)
+        
+        if stars.position.y < -stars.size.height {
+            stars.position.y = stars2.size.height + 10
+        }
+        if stars2.position.y < -stars2.size.height {
+            stars2.position.y = stars.size.height + 10
+        }
+        
     }
+    
+    // MARK: Setup Methods
+    
+    func setupBackground() {
+        let background = SKSpriteNode(imageNamed: "Background")
+        background.position = CGPointMake(self.size.width/2, self.size.height/2)
+        background.zPosition = -1
+        addChild(background)
+    }
+ 
+    func setupStars() {
+        // Add Stars
+        stars.position = CGPointMake(self.size.width/2, self.size.height/2)
+        stars.zPosition = 0
+        addChild(stars)
+        
+        stars2.position = CGPointMake(self.size.width/2, stars.size.height + 10)
+        stars2.zPosition = 0
+        addChild(stars2)
+    }
+    
+    func radomizePlanetSize() -> CGSize {
+        let randomNumber = Int(arc4random_uniform(500))
+        return CGSize(width: randomNumber, height: randomNumber)
+    }
+    
+    func randomPlanetPosition(screenWidth: UInt32, screenHeight: UInt32) -> CGPoint {
+        let randomX = CGFloat(arc4random_uniform(screenWidth))
+        let randomY = CGFloat(arc4random_uniform(screenHeight))
+        return CGPointMake(randomX, randomY)
+    }
+    
+    func setupPlanets(planet: SKSpriteNode) {
+        planet.zPosition = 1
+        planet.size = radomizePlanetSize()
+        planet.position = randomPlanetPosition(UInt32(self.frame.size.width), screenHeight: UInt32(self.frame.size.height + 21))
+        addChild(planet)
+    }
+    
+    
 }
