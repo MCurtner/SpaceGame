@@ -16,7 +16,7 @@ class GameScene: SKScene {
     let farPlanets = SKSpriteNode(imageNamed: "farPlanets")
     let farPlanets2 = SKSpriteNode(imageNamed: "farPlanets")
     let planet2 = SKSpriteNode(imageNamed: "planetRing")
-    let starShip = SKSpriteNode(imageNamed: "Spaceship")
+    let starShip = SKSpriteNode(imageNamed: "Ship")
     
     
     override func didMoveToView(view: SKView) {
@@ -33,21 +33,48 @@ class GameScene: SKScene {
         
         
         // Add Ship
-        starShip.size = CGSize(width: 100, height: 100)
+        starShip.size = CGSize(width: 100, height: 150)
         starShip.zPosition = 3
-        starShip.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/3)
+        starShip.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/5)
         addChild(starShip)
+        
+        
+        let Timer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: Selector("spawnFire"), userInfo: nil, repeats: true)
+        
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-       /* Called when a touch begins */
+        for touch: AnyObject in touches {
+            let location = touch.locationInNode(self)
+            starShip.position.x = location.x
+        }
     }
    
+    
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        for touch: AnyObject in touches {
+            let location = touch.locationInNode(self)
+            starShip.position.x = location.x
+        }
+    }
+    
+    
     override func update(currentTime: CFTimeInterval) {
 
         moveDown(stars, sprite2: stars2, speed: 0.5)
         moveDown(farPlanets, sprite2: farPlanets2, speed: 0.7)
         movePlanetsDown()
+    }
+    
+    
+    func spawnFire() {
+        let fire = SKSpriteNode(imageNamed: "Fire")
+        fire.size = CGSizeMake(100, 150)
+        fire.zPosition = 2
+        fire.position = CGPointMake(starShip.position.x, starShip.position.y)
+        let action = SKAction.moveToY(stars.size.height + 30, duration: 1.0)
+        fire.runAction(SKAction.repeatActionForever(action))
+        self.addChild(fire)
     }
     
     
