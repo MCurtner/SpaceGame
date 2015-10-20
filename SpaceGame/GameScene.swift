@@ -8,6 +8,15 @@
 
 import SpriteKit
 
+enum Layers: CGFloat {
+    case Stars
+    case FarPlanets
+    case NearPlanets
+    case Fire
+    case StarShip
+}
+
+
 class GameScene: SKScene {
     
     let stars = SKSpriteNode(imageNamed: "stars")
@@ -18,6 +27,7 @@ class GameScene: SKScene {
     let planet2 = SKSpriteNode(imageNamed: "planetRing")
     let starShip = SKSpriteNode(imageNamed: "Ship")
     
+    var timer = NSTimer()
     
     override func didMoveToView(view: SKView) {
 
@@ -25,8 +35,8 @@ class GameScene: SKScene {
         setupBackground()
        
         // Add Stars and Far Planets
-        setupOverlays(stars, sprite2: stars2, zPos: 0)
-        setupOverlays(farPlanets, sprite2: farPlanets2, zPos: 1)
+        setupOverlays(stars, sprite2: stars2, zPos: Layers.Stars.rawValue)
+        setupOverlays(farPlanets, sprite2: farPlanets2, zPos: Layers.FarPlanets.rawValue)
         
         // Add Planets
         setupPlanets(planet)
@@ -34,19 +44,27 @@ class GameScene: SKScene {
         
         // Add Ship
         starShip.size = CGSize(width: 100, height: 150)
-        starShip.zPosition = 3
+        starShip.zPosition = Layers.StarShip.rawValue
         starShip.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/5)
         addChild(starShip)
         
         
-        let Timer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: Selector("spawnFire"), userInfo: nil, repeats: true)
         
     }
+    
+    
+    // MARK: - Touches Methods
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
             starShip.position.x = location.x
+            
+            if location.y < self.frame.size.height/5 {
+                starShip.position.y = location.y
+            }
+            
+            shootWeapon()
         }
     }
    
@@ -55,8 +73,19 @@ class GameScene: SKScene {
         for touch: AnyObject in touches {
             let location = touch.locationInNode(self)
             starShip.position.x = location.x
+            
+            if location.y < self.frame.size.height/5 {
+                starShip.position.y = location.y
+            }
         }
     }
+    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        timer.invalidate()
+    }
+    
+
+    // MARK: - Update Loop
     
     
     override func update(currentTime: CFTimeInterval) {
@@ -67,16 +96,26 @@ class GameScene: SKScene {
     }
     
     
+    // MARK: Actions
+    
     func spawnFire() {
         let fire = SKSpriteNode(imageNamed: "Fire")
         fire.size = CGSizeMake(100, 150)
-        fire.zPosition = 2
+        fire.zPosition = Layers.Fire.rawValue
         fire.position = CGPointMake(starShip.position.x, starShip.position.y)
         let action = SKAction.moveToY(stars.size.height + 30, duration: 1.0)
+        //let waitAction = SKAction.waitForDuration(1.0)
+        
+        //let sequence = SKAction.sequence([action,waitAction])
+
         fire.runAction(SKAction.repeatActionForever(action))
         self.addChild(fire)
     }
     
+    func shootWeapon() {
+        timer = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: Selector("spawnFire"), userInfo: nil, repeats: true)
+
+    }
     
     
     // MARK: Setup Methods
@@ -154,7 +193,7 @@ class GameScene: SKScene {
         Setup and add the planet to the scene
     */
     func setupPlanets(planet: SKSpriteNode) {
-        planet.zPosition = 2
+        planet.zPosition = Layers.NearPlanets.rawValue
         planet.size = radomizePlanetSize()
         planet.position = randomPlanetPosition(UInt32(self.frame.size.width), screenHeight: UInt32(self.frame.size.height) * 2)
         addChild(planet)
