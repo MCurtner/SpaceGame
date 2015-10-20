@@ -19,6 +19,7 @@ enum Layers: CGFloat {
 
 class GameScene: SKScene {
     
+    // SKSpriteNodes
     let stars = SKSpriteNode(imageNamed: "stars")
     let stars2 = SKSpriteNode(imageNamed: "stars")
     let planet = SKSpriteNode(imageNamed: "planetBig")
@@ -27,8 +28,17 @@ class GameScene: SKScene {
     let planet2 = SKSpriteNode(imageNamed: "planetRing")
     let starShip = SKSpriteNode(imageNamed: "Ship")
     
+    // Offset of Y-Postion of players touch
+    let shipTouchHeightOffset: CGFloat = 120.0
+    
+    // Timer for firing weapon in intervals
     var timer = NSTimer()
     
+    // Laser sound action
+    var sound = SKAction.playSoundFileNamed("laser.mp3", waitForCompletion: false)
+
+    
+    // Load the scene
     override func didMoveToView(view: SKView) {
 
         // Add Background
@@ -41,15 +51,8 @@ class GameScene: SKScene {
         // Add Planets
         setupPlanets(planet)
         
-        
         // Add Ship
-        starShip.size = CGSize(width: 100, height: 150)
-        starShip.zPosition = Layers.StarShip.rawValue
-        starShip.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/5)
-        addChild(starShip)
-        
-        
-        
+        setupShip()
     }
     
     
@@ -62,12 +65,12 @@ class GameScene: SKScene {
             
             if location.y < self.frame.size.height/5 {
                 starShip.position.y = location.y
+                starShip.position.y += shipTouchHeightOffset
             }
             
             shootWeapon()
         }
     }
-   
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         for touch: AnyObject in touches {
@@ -76,17 +79,19 @@ class GameScene: SKScene {
             
             if location.y < self.frame.size.height/5 {
                 starShip.position.y = location.y
+                starShip.position.y += shipTouchHeightOffset
             }
         }
     }
     
+    
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        // Invalidate the timer to stop the weapon from firing
         timer.invalidate()
     }
     
 
     // MARK: - Update Loop
-    
     
     override func update(currentTime: CFTimeInterval) {
 
@@ -109,6 +114,7 @@ class GameScene: SKScene {
         //let sequence = SKAction.sequence([action,waitAction])
 
         fire.runAction(SKAction.repeatActionForever(action))
+        fire.runAction(sound)
         self.addChild(fire)
     }
     
@@ -221,5 +227,12 @@ class GameScene: SKScene {
         }
     }
 
+    
+    func setupShip() {
+        starShip.size = CGSize(width: 100, height: 150)
+        starShip.zPosition = Layers.StarShip.rawValue
+        starShip.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/5)
+        addChild(starShip)
+    }
     
 }

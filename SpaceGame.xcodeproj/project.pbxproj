@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA2B8EA71BD6B411003FFE08 /* laser.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BA2B8EA61BD6B411003FFE08 /* laser.mp3 */; settings = {ASSET_TAGS = (); }; };
 		BA60279B1BD3B0740018C342 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA60279A1BD3B0740018C342 /* AppDelegate.swift */; };
 		BA60279D1BD3B0740018C342 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BA60279C1BD3B0740018C342 /* GameScene.sks */; };
 		BA60279F1BD3B0740018C342 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA60279E1BD3B0740018C342 /* GameScene.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BA2B8EA61BD6B411003FFE08 /* laser.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = laser.mp3; sourceTree = "<group>"; };
 		BA6027971BD3B0740018C342 /* SpaceGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA60279A1BD3B0740018C342 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA60279C1BD3B0740018C342 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 		BA6027991BD3B0740018C342 /* SpaceGame */ = {
 			isa = PBXGroup;
 			children = (
+				BA2B8EA61BD6B411003FFE08 /* laser.mp3 */,
 				BA60279A1BD3B0740018C342 /* AppDelegate.swift */,
 				BA60279C1BD3B0740018C342 /* GameScene.sks */,
 				BA60279E1BD3B0740018C342 /* GameScene.swift */,
@@ -238,6 +241,7 @@
 				BA6027A91BD3B0740018C342 /* LaunchScreen.storyboard in Resources */,
 				BA6027A61BD3B0740018C342 /* Assets.xcassets in Resources */,
 				BA6027A41BD3B0740018C342 /* Main.storyboard in Resources */,
+				BA2B8EA71BD6B411003FFE08 /* laser.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -491,6 +495,7 @@
 				BA6027C51BD3B0740018C342 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BA6027C61BD3B0740018C342 /* Build configuration list for PBXNativeTarget "SpaceGameTests" */ = {
 			isa = XCConfigurationList;
@@ -499,6 +504,7 @@
 				BA6027C81BD3B0740018C342 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BA6027C91BD3B0740018C342 /* Build configuration list for PBXNativeTarget "SpaceGameUITests" */ = {
 			isa = XCConfigurationList;
@@ -507,6 +513,7 @@
 				BA6027CB1BD3B0740018C342 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
