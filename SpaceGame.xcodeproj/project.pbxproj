@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3457E5951BD7EC6600380783 /* BackgroundElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3457E5941BD7EC6600380783 /* BackgroundElements.swift */; settings = {ASSET_TAGS = (); }; };
 		BA2B8EA71BD6B411003FFE08 /* laser.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BA2B8EA61BD6B411003FFE08 /* laser.mp3 */; settings = {ASSET_TAGS = (); }; };
 		BA60279B1BD3B0740018C342 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA60279A1BD3B0740018C342 /* AppDelegate.swift */; };
 		BA60279D1BD3B0740018C342 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BA60279C1BD3B0740018C342 /* GameScene.sks */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3457E5941BD7EC6600380783 /* BackgroundElements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundElements.swift; sourceTree = "<group>"; };
 		BA2B8EA61BD6B411003FFE08 /* laser.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = laser.mp3; sourceTree = "<group>"; };
 		BA6027971BD3B0740018C342 /* SpaceGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA60279A1BD3B0740018C342 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				BA6027A51BD3B0740018C342 /* Assets.xcassets */,
 				BA6027A71BD3B0740018C342 /* LaunchScreen.storyboard */,
 				BA6027AA1BD3B0740018C342 /* Info.plist */,
+				3457E5941BD7EC6600380783 /* BackgroundElements.swift */,
 			);
 			path = SpaceGame;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3457E5951BD7EC6600380783 /* BackgroundElements.swift in Sources */,
 				BA60279F1BD3B0740018C342 /* GameScene.swift in Sources */,
 				BA6027A11BD3B0740018C342 /* GameViewController.swift in Sources */,
 				BA60279B1BD3B0740018C342 /* AppDelegate.swift in Sources */,
