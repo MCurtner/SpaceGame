@@ -82,6 +82,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BA2B8EA81BD8054B003FFE08 /* Background */ = {
+			isa = PBXGroup;
+			children = (
+				3457E5941BD7EC6600380783 /* BackgroundElements.swift */,
+			);
+			name = Background;
+			sourceTree = "<group>";
+		};
 		BA60278E1BD3B0740018C342 = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +113,7 @@
 		BA6027991BD3B0740018C342 /* SpaceGame */ = {
 			isa = PBXGroup;
 			children = (
+				BA2B8EA81BD8054B003FFE08 /* Background */,
 				BA2B8EA61BD6B411003FFE08 /* laser.mp3 */,
 				BA60279A1BD3B0740018C342 /* AppDelegate.swift */,
 				BA60279C1BD3B0740018C342 /* GameScene.sks */,
@@ -114,7 +123,6 @@
 				BA6027A51BD3B0740018C342 /* Assets.xcassets */,
 				BA6027A71BD3B0740018C342 /* LaunchScreen.storyboard */,
 				BA6027AA1BD3B0740018C342 /* Info.plist */,
-				3457E5941BD7EC6600380783 /* BackgroundElements.swift */,
 			);
 			path = SpaceGame;
 			sourceTree = "<group>";
