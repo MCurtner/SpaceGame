@@ -18,6 +18,7 @@
 		BA6027A91BD3B0740018C342 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA6027A71BD3B0740018C342 /* LaunchScreen.storyboard */; };
 		BA6027B41BD3B0740018C342 /* SpaceGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6027B31BD3B0740018C342 /* SpaceGameTests.swift */; };
 		BA6027BF1BD3B0740018C342 /* SpaceGameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6027BE1BD3B0740018C342 /* SpaceGameUITests.swift */; };
+		BAE5016E1BD9602200DAFC55 /* bgMusic.wav in Resources */ = {isa = PBXBuildFile; fileRef = BAE5016D1BD9602200DAFC55 /* bgMusic.wav */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		BA6027BA1BD3B0740018C342 /* SpaceGameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceGameUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA6027BE1BD3B0740018C342 /* SpaceGameUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceGameUITests.swift; sourceTree = "<group>"; };
 		BA6027C01BD3B0740018C342 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BAE5016D1BD9602200DAFC55 /* bgMusic.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bgMusic.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 		BA6027991BD3B0740018C342 /* SpaceGame */ = {
 			isa = PBXGroup;
 			children = (
+				BAE5016D1BD9602200DAFC55 /* bgMusic.wav */,
 				BA2B8EA81BD8054B003FFE08 /* Background */,
 				BA2B8EA61BD6B411003FFE08 /* laser.mp3 */,
 				BA60279A1BD3B0740018C342 /* AppDelegate.swift */,
@@ -253,6 +256,7 @@
 				BA6027A61BD3B0740018C342 /* Assets.xcassets in Resources */,
 				BA6027A41BD3B0740018C342 /* Main.storyboard in Resources */,
 				BA2B8EA71BD6B411003FFE08 /* laser.mp3 in Resources */,
+				BAE5016E1BD9602200DAFC55 /* bgMusic.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

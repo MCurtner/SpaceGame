@@ -36,6 +36,11 @@ class GameScene: SKScene {
     // MARK: - Scene Lifecycle
     
     override func didMoveToView(view: SKView) {
+        let bgMusic = SKAction.playSoundFileNamed("bgMusic.wav", waitForCompletion: true)
+        let playBGMusic = SKAction.repeatActionForever(bgMusic)
+        
+        runAction(playBGMusic)
+        
         
         // Add Background Elements
         addChild(bgElement.setupBackground(self.frame.size.width, frameHeight: self.frame.size.height))
@@ -150,10 +155,10 @@ class GameScene: SKScene {
         let moveX_3: SKAction = SKAction.moveBy(CGVectorMake(50, 0), duration: 0.05)
         let moveX_4: SKAction = SKAction.moveBy(CGVectorMake(50, 0), duration: 0.05)
         
-        let moveY_1: SKAction = SKAction.moveBy(CGVectorMake(-0, -10), duration: 0.05)
-        let moveY_2: SKAction = SKAction.moveBy(CGVectorMake(0, -10), duration: 0.05)
-        let moveY_3: SKAction = SKAction.moveBy(CGVectorMake(0, 10), duration: 0.05)
-        let moveY_4: SKAction = SKAction.moveBy(CGVectorMake(0, 10), duration: 0.05)
+        let moveY_1: SKAction = SKAction.moveBy(CGVectorMake(-0, -50), duration: 0.05)
+        let moveY_2: SKAction = SKAction.moveBy(CGVectorMake(0, -50), duration: 0.05)
+        let moveY_3: SKAction = SKAction.moveBy(CGVectorMake(0, 50), duration: 0.05)
+        let moveY_4: SKAction = SKAction.moveBy(CGVectorMake(0, 50), duration: 0.05)
         
         let trembleX: SKAction = SKAction.sequence([moveX_1, moveX_4, moveX_2, moveX_3])
         let trembleY: SKAction = SKAction.sequence([moveY_1, moveY_4, moveY_2, moveY_3])
