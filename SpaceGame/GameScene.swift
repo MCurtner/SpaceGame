@@ -16,7 +16,6 @@ enum Layers: CGFloat {
     case StarShip
 }
 
-
 class GameScene: SKScene {
     
     // SKSpriteNodes
@@ -33,7 +32,6 @@ class GameScene: SKScene {
     
     // BackgroundElements Instance
     let bgElement = BackgroundElements()
-    
     
     // MARK: - Scene Lifecycle
     
@@ -105,6 +103,7 @@ class GameScene: SKScene {
         starShip.size = CGSize(width: 100, height: 150)
         starShip.zPosition = Layers.StarShip.rawValue
         starShip.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/5)
+        starShip.name = "ship"
         addChild(starShip)
     }
     
@@ -122,6 +121,47 @@ class GameScene: SKScene {
     
     func shootWeapon() {
         timer = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: Selector("spawnFire"), userInfo: nil, repeats: true)
+        
+        //pulsateBackground()
+        shakeScreen()
+    }
+    
+
+    // MARK: - Effects
+    
+    // Quickly enlarge and then set back the scale of the nodes
+    func pulsateBackground() {
+        
+        self.childNodeWithName("background")?.runAction(SKAction.scaleTo(1.05, duration: 0.05), completion: { () -> Void in
+            self.childNodeWithName("background")?.runAction(SKAction.scaleTo(1.0, duration: 0.05))
+        })
+        self.childNodeWithName("planet")?.runAction(SKAction.scaleTo(1.05, duration: 0.05), completion: { () -> Void in
+            self.childNodeWithName("planet")?.runAction(SKAction.scaleTo(1.0, duration: 0.05))
+        })
+        self.childNodeWithName("ship")?.runAction(SKAction.scaleTo(1.05, duration: 0.05), completion: { () -> Void in
+            self.childNodeWithName("ship")?.runAction(SKAction.scaleTo(1.0, duration: 0.05))
+        })
+    }
+    
+    // Shake the screen when hit
+    func shakeScreen() {
+        let moveX_1: SKAction = SKAction.moveBy(CGVectorMake(-50, 0), duration: 0.05)
+        let moveX_2: SKAction = SKAction.moveBy(CGVectorMake(-50, 0), duration: 0.05)
+        let moveX_3: SKAction = SKAction.moveBy(CGVectorMake(50, 0), duration: 0.05)
+        let moveX_4: SKAction = SKAction.moveBy(CGVectorMake(50, 0), duration: 0.05)
+        
+        let moveY_1: SKAction = SKAction.moveBy(CGVectorMake(-0, -7), duration: 0.05)
+        let moveY_2: SKAction = SKAction.moveBy(CGVectorMake(0, -10), duration: 0.05)
+        let moveY_3: SKAction = SKAction.moveBy(CGVectorMake(0, 7), duration: 0.05)
+        let moveY_4: SKAction = SKAction.moveBy(CGVectorMake(0, 10), duration: 0.05)
+        
+        let trembleX: SKAction = SKAction.sequence([moveX_1, moveX_4, moveX_2, moveX_3])
+        let trembleY: SKAction = SKAction.sequence([moveY_1, moveY_4, moveY_2, moveY_3])
+
+        for child in self.children {
+            child.runAction(trembleX)
+            child.runAction(trembleY)
+        }
     }
     
 }

@@ -34,6 +34,7 @@ class BackgroundElements: SKNode {
         let background = SKSpriteNode(imageNamed: "Background")
         background.position = CGPointMake(frameWidth/2, frameHeight/2)
         background.zPosition = -1
+        background.name = "background"
         
         return background
     }
@@ -55,7 +56,7 @@ class BackgroundElements: SKNode {
         planet.zPosition = Layers.NearPlanets.rawValue
         planet.size = radomizePlanetSize()
         planet.position = randomPlanetPosition(UInt32(screenWidth!), screenHeight: UInt32(screenHeight!) * 2)
-        
+        planet.name = "planet"
         return planet
     }
     
@@ -94,7 +95,6 @@ class BackgroundElements: SKNode {
             planet.position.y = stars.size.height + 10
         }
     }
-    
     
 
     
@@ -159,6 +159,8 @@ class BackgroundElements: SKNode {
         let randomY = CGFloat(arc4random_uniform(screenHeight))
         return CGPointMake(randomX, randomY)
     }
+
+    
 
     
 }
