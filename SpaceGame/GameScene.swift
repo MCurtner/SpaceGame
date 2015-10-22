@@ -150,9 +150,9 @@ class GameScene: SKScene {
         let moveX_3: SKAction = SKAction.moveBy(CGVectorMake(50, 0), duration: 0.05)
         let moveX_4: SKAction = SKAction.moveBy(CGVectorMake(50, 0), duration: 0.05)
         
-        let moveY_1: SKAction = SKAction.moveBy(CGVectorMake(-0, -7), duration: 0.05)
+        let moveY_1: SKAction = SKAction.moveBy(CGVectorMake(-0, -10), duration: 0.05)
         let moveY_2: SKAction = SKAction.moveBy(CGVectorMake(0, -10), duration: 0.05)
-        let moveY_3: SKAction = SKAction.moveBy(CGVectorMake(0, 7), duration: 0.05)
+        let moveY_3: SKAction = SKAction.moveBy(CGVectorMake(0, 10), duration: 0.05)
         let moveY_4: SKAction = SKAction.moveBy(CGVectorMake(0, 10), duration: 0.05)
         
         let trembleX: SKAction = SKAction.sequence([moveX_1, moveX_4, moveX_2, moveX_3])
