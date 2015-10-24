@@ -20,7 +20,7 @@ class GameScene: SKScene {
     
     // SKSpriteNodes
     let starShip = SKSpriteNode(imageNamed: "Ship")
-    let enemyShip = SKSpriteNode(imageNamed: "EnemyShip")
+    let enemyShip = SKSpriteNode(imageNamed: "enemy_small")
     
     // Offset of Y-Postion of players touch
     let kShipTouchHeightOffset: CGFloat = 120.0
@@ -156,7 +156,7 @@ class GameScene: SKScene {
     func spawnEnemy() {
         enemyShip.size = CGSize(width: 100, height: 150)
         enemyShip.zPosition = Layers.StarShip.rawValue
-        enemyShip.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/2)
+        enemyShip.position = CGPointMake(self.frame.size.width/2, self.frame.size.height - 50)
         enemyShip.name = "enemy"
         addChild(enemyShip)
     }
