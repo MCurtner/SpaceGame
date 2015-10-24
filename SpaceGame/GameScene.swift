@@ -20,36 +20,42 @@ class GameScene: SKScene {
     
     // SKSpriteNodes
     let starShip = SKSpriteNode(imageNamed: "Ship")
+    let enemyShip = SKSpriteNode(imageNamed: "EnemyShip")
     
     // Offset of Y-Postion of players touch
-    let shipTouchHeightOffset: CGFloat = 120.0
+    let kShipTouchHeightOffset: CGFloat = 120.0
     
     // Timer for firing weapon in intervals
     var timer = NSTimer()
+    var enemyTimer = NSTimer()
     
     // Laser sound action
     let sound = SKAction.playSoundFileNamed("laser.mp3", waitForCompletion: false)
     
     // BackgroundElements Instance
     let bgElement = BackgroundElements()
+
+    
     
     // MARK: - Scene Lifecycle
     
     override func didMoveToView(view: SKView) {
-        let bgMusic = SKAction.playSoundFileNamed("bgMusic.wav", waitForCompletion: true)
-        let playBGMusic = SKAction.repeatActionForever(bgMusic)
-        
-        runAction(playBGMusic)
-        
         
         // Add Background Elements
         addChild(bgElement.setupBackground(self.frame.size.width, frameHeight: self.frame.size.height))
         addChild(bgElement.setupStars())
+        addChild(bgElement.setupStars2())
+        
         addChild(bgElement.setupFarPlanets())
+        addChild(bgElement.setupFarPlanets2())
         addChild(bgElement.setupPlanets())
         
         // Add the Ship
         setupShip()
+        spawnEnemy()
+        
+        // Start the Background Music
+        playBackgroundMusic()
     }
     
     
@@ -63,11 +69,12 @@ class GameScene: SKScene {
             // Not allowing the ship to pass a certain height
             if location.y < self.frame.size.height/5 {
                 starShip.position.y = location.y
-                starShip.position.y += shipTouchHeightOffset
+                starShip.position.y += kShipTouchHeightOffset
             }
             
             // Firing Weapon when user touches
             shootWeapon()
+            enemyFire()
         }
     }
     
@@ -79,7 +86,7 @@ class GameScene: SKScene {
             // Not allowing the ship to pass a certain height
             if location.y < self.frame.size.height/5 {
                 starShip.position.y = location.y
-                starShip.position.y += shipTouchHeightOffset
+                starShip.position.y += kShipTouchHeightOffset
             }
         }
     }
@@ -88,6 +95,7 @@ class GameScene: SKScene {
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         // Invalidate the timer to stop the weapon from firing
         timer.invalidate()
+        enemyTimer.invalidate()
     }
     
 
@@ -102,7 +110,18 @@ class GameScene: SKScene {
     }
     
     
-    // MARK: Ship Methods
+    // MARK: - Background Music
+    
+    func playBackgroundMusic() {
+        let bgMusic = SKAction.playSoundFileNamed("bgMusic.wav", waitForCompletion: true)
+        let playBGMusic = SKAction.repeatActionForever(bgMusic)
+        
+        runAction(playBGMusic)
+    }
+    
+    
+    
+    // MARK: - Ship Methods
     
     func setupShip() {
         starShip.size = CGSize(width: 100, height: 150)
@@ -131,10 +150,37 @@ class GameScene: SKScene {
         shakeScreen()
     }
     
+    
+    // MARK: - Enemy Methods
+    
+    func spawnEnemy() {
+        enemyShip.size = CGSize(width: 100, height: 150)
+        enemyShip.zPosition = Layers.StarShip.rawValue
+        enemyShip.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/2)
+        enemyShip.name = "enemy"
+        addChild(enemyShip)
+    }
+    
+    func spawnEnemyFire() {
+        let fire = SKSpriteNode(imageNamed: "Fire")
+        fire.size = CGSizeMake(100, 150)
+        fire.zPosition = Layers.Fire.rawValue
+        fire.position = CGPointMake(enemyShip.position.x, enemyShip.position.y)
+        let action = SKAction.moveToY(-frame.size.height * 3, duration: 1.0)
+        
+        fire.runAction(SKAction.repeatActionForever(action))
+        fire.runAction(sound)
+        self.addChild(fire)
+    }
+    
+    func enemyFire() {
+        enemyTimer = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: Selector("spawnEnemyFire"), userInfo: nil, repeats: true)
+    }
+    
 
     // MARK: - Effects
     
-    // Quickly enlarge and then set back the scale of the nodes
+    // Quickly enlarge and then set back the scale of the sprites
     func pulsateBackground() {
         
         self.childNodeWithName("background")?.runAction(SKAction.scaleTo(1.05, duration: 0.05), completion: { () -> Void in

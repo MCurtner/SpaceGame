@@ -84,6 +84,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		347F84731BDB6D0900E2BB86 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				BA2B8EA61BD6B411003FFE08 /* laser.mp3 */,
+				BAE5016D1BD9602200DAFC55 /* bgMusic.wav */,
+			);
+			name = Sounds;
+			sourceTree = "<group>";
+		};
+		347F84741BDB6D2000E2BB86 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				BA60279C1BD3B0740018C342 /* GameScene.sks */,
+				BA60279E1BD3B0740018C342 /* GameScene.swift */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
+		347F84751BDB6D3200E2BB86 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				BA6027A01BD3B0740018C342 /* GameViewController.swift */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		347F84761BDB6D3C00E2BB86 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				BA60279A1BD3B0740018C342 /* AppDelegate.swift */,
+			);
+			name = AppDelegate;
+			sourceTree = "<group>";
+		};
 		BA2B8EA81BD8054B003FFE08 /* Background */ = {
 			isa = PBXGroup;
 			children = (
@@ -115,13 +149,11 @@
 		BA6027991BD3B0740018C342 /* SpaceGame */ = {
 			isa = PBXGroup;
 			children = (
-				BAE5016D1BD9602200DAFC55 /* bgMusic.wav */,
+				347F84761BDB6D3C00E2BB86 /* AppDelegate */,
 				BA2B8EA81BD8054B003FFE08 /* Background */,
-				BA2B8EA61BD6B411003FFE08 /* laser.mp3 */,
-				BA60279A1BD3B0740018C342 /* AppDelegate.swift */,
-				BA60279C1BD3B0740018C342 /* GameScene.sks */,
-				BA60279E1BD3B0740018C342 /* GameScene.swift */,
-				BA6027A01BD3B0740018C342 /* GameViewController.swift */,
+				347F84741BDB6D2000E2BB86 /* Scenes */,
+				347F84731BDB6D0900E2BB86 /* Sounds */,
+				347F84751BDB6D3200E2BB86 /* ViewController */,
 				BA6027A21BD3B0740018C342 /* Main.storyboard */,
 				BA6027A51BD3B0740018C342 /* Assets.xcassets */,
 				BA6027A71BD3B0740018C342 /* LaunchScreen.storyboard */,

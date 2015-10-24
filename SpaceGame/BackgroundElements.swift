@@ -22,7 +22,6 @@ class BackgroundElements: SKNode {
     let planet2 = SKSpriteNode(imageNamed: "planetRing")
     
     
-    
     // MARK: - Setup Sprite Methods
     
     // Setup and return the background to the scene
@@ -42,12 +41,38 @@ class BackgroundElements: SKNode {
     // Setup and return the stars overlay to the scene
     
     internal func setupStars() -> SKSpriteNode {
-        return setupOverlays(stars, sprite2: stars2, zPos: Layers.Stars.rawValue)
+        // Add overlay1
+        stars.position = CGPointMake(screenWidth!/2, stars.size.height/2)
+        stars.zPosition = Layers.Stars.rawValue
+        
+        return stars
     }
     
+    internal func setupStars2() -> SKSpriteNode {
+        // Add overlay2
+        stars2.position = CGPointMake(screenWidth!/2, stars.size.height * 2)
+        stars2.zPosition = Layers.Stars.rawValue
+        
+        return stars2
+    }
+
+    
     // Setup and return the FarPlanets overlay to the scene
+
     internal func setupFarPlanets() -> SKSpriteNode {
-        return setupOverlays(farPlanets, sprite2: farPlanets2, zPos: Layers.FarPlanets.rawValue)
+        // Add overlay1
+        farPlanets.position = CGPointMake(screenWidth!/2, farPlanets.size.height/2)
+        farPlanets.zPosition = Layers.FarPlanets.rawValue
+        
+        return farPlanets
+    }
+    
+    internal func setupFarPlanets2() -> SKSpriteNode {
+        // Add overlay2
+        farPlanets2.position = CGPointMake(screenWidth!/2, farPlanets2.size.height * 2)
+        farPlanets2.zPosition = Layers.FarPlanets.rawValue
+        
+        return farPlanets2
     }
     
     
@@ -66,14 +91,13 @@ class BackgroundElements: SKNode {
     // Move the Star Overlays with a speed of 0.5
     
     internal func moveStarsDown() {
-        moveDown(stars, sprite2: stars2, speed: 0.5)
+        moveDown(sprite1: stars, sprite2: stars2, speed: 0.5)
     }
-    
     
     // Move the FarPlanets Overlays with a speed of 0.7
     
     internal func moveFarPlanetsDown() {
-        moveDown(farPlanets, sprite2: farPlanets2, speed: 0.7)
+        moveDown(sprite1: farPlanets, sprite2: farPlanets2, speed: 0.7)
     }
     
     // Move the Near Planet Sprites with a speed of 3
@@ -97,34 +121,13 @@ class BackgroundElements: SKNode {
     }
     
 
-    
     // MARK: - Private Helper Methods
-    
-    /*
-        Helper method to setup and add the overlays to the scene. The second
-        ontop of the other in order to repeat.
-    */
-    private func setupOverlays(sprite1: SKSpriteNode, sprite2: SKSpriteNode, zPos: CGFloat) -> SKSpriteNode {
-        // Add overlay1
-        sprite1.position = CGPointMake(screenWidth!/2, screenHeight!/2)
-        sprite1.zPosition = zPos
-        
-        // Add overlay2
-        sprite2.position = CGPointMake(screenWidth!/2, sprite1.size.height + 10)
-        sprite2.zPosition = zPos
-        
-        // Chain the nodes together
-        sprite1.addChild(sprite2)
-        
-        return sprite1
-    }
-    
     
     /*
         Move the sprite images down at a rate of set speed downward for every
         1/60 of a second
     */
-    private func moveDown(sprite1: SKSpriteNode, sprite2: SKSpriteNode, speed: CGFloat) {
+    private func moveDown(sprite1 sprite1: SKSpriteNode, sprite2: SKSpriteNode, speed: CGFloat) {
         sprite1.position = CGPoint(x: sprite1.position.x, y: sprite1.position.y - speed)
         sprite2.position = CGPoint(x: sprite2.position.x, y: sprite2.position.y - speed)
         
@@ -133,10 +136,10 @@ class BackgroundElements: SKNode {
         once it's position is less than the -height of iteself
         */
         if sprite1.position.y < -sprite1.size.height {
-            sprite1.position.y = sprite2.size.height + 10
+            sprite1.position.y = sprite2.size.height + 100
         }
         if sprite2.position.y < -sprite2.size.height {
-            sprite2.position.y = sprite1.size.height + 10
+            sprite2.position.y = sprite1.size.height + 100
         }
         
     }
